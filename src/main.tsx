@@ -8,8 +8,8 @@ import "@/requests/request.ts";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 60000,
-      gcTime: 60000 * 10,
+      staleTime: 30000,
+      gcTime: 60000 * 3,
       refetchOnWindowFocus: false,
       refetchOnMount: false,
       retry: false,

@@ -10,8 +10,8 @@ interface QueryParams {
 
 export const useTopicsQuery = ({ params, enabled }: QueryParams) => {
   const { data, isLoading, refetch } = useQuery({
-    queryFn: () => getTopics(params?.search || ""),
-    queryKey: [QUERY_KEYS.TOPICS, params?.title],
+    queryFn: () => getTopics(params?.search || "", params?.sectionId),
+    queryKey: [QUERY_KEYS.TOPICS, params?.title, params?.sectionId],
     refetchOnWindowFocus: false,
     enabled,
   });

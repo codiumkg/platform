@@ -7,8 +7,8 @@ function InfoSection() {
   const { data, isFetching } = useUserData();
 
   return (
-    <div className="flex gap-4 justify-between items-center p-6 h-60 mb-40">
-      <div className="flex flex-col">
+    <div className="flex gap-4 justify-between items-center p-6 h-96">
+      <div className="flex flex-col items-center justify-center min-w-48">
         {isFetching && <LoadingSpinner light size="l" />}
         {!isFetching && (
           <>
