@@ -1,5 +1,5 @@
 import { FaBook } from "react-icons/fa";
-import { ISection } from "@/interfaces/types/section";
+import { ISection } from "@/interfaces/section";
 
 interface Props {
   section: ISection;
@@ -7,7 +7,7 @@ interface Props {
 
 function SectionCard({ section }: Props) {
   return (
-    <div className="flex flex-col p-4 rounded-xl bg-secondary border border-highlight">
+    <div className="flex flex-col p-4 rounded-xl bg-secondary border border-highlight hover:border-highlight-secondary duration-300">
       <div>
         <h1 className="text-lg font-bold">{section.title}</h1>
         <h3 className="text-sm font-light text-highlight-secondary">1 / 4</h3>

@@ -1,4 +1,4 @@
-import { ISection } from "@/interfaces/types/section";
+import { ISection } from "@/interfaces/section";
 import SectionCard from "./SectionCard";
 
 const SECTIONS: ISection[] = [
