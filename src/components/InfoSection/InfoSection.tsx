@@ -24,8 +24,8 @@ function InfoSection() {
       <div className="flex flex-col">
         <div className="w-36 h-36">
           <CircularProgressbar
-            value={56}
-            text="56%"
+            value={0}
+            text="0%"
             styles={buildStyles({
               strokeLinecap: "butt",
               textColor: "var(--accent-color)",

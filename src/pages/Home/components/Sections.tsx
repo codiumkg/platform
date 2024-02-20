@@ -11,26 +11,31 @@ function Sections() {
   const navigate = useNavigate();
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 gap-6 py-10">
-      {isPending && (
-        <>
-          <SectionCardShimmer />
-          <SectionCardShimmer />
-          <SectionCardShimmer />
-          <SectionCardShimmer />
-          <SectionCardShimmer />
-          <SectionCardShimmer />
-          <SectionCardShimmer />
-        </>
-      )}
-      {!isPending &&
-        sections?.map((section, index) => (
-          <SectionCard
-            key={index}
-            section={section}
-            onClick={() => navigate(`${ROUTES.SECTION_DETAILS}/${section.id}`)}
-          />
-        ))}
+    <div>
+      <h1 className="text-2xl font-bold">Разделы</h1>
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-6 py-10">
+        {isPending && (
+          <>
+            <SectionCardShimmer />
+            <SectionCardShimmer />
+            <SectionCardShimmer />
+            <SectionCardShimmer />
+            <SectionCardShimmer />
+            <SectionCardShimmer />
+            <SectionCardShimmer />
+          </>
+        )}
+        {!isPending &&
+          sections?.map((section, index) => (
+            <SectionCard
+              key={index}
+              section={section}
+              onClick={() =>
+                navigate(`${ROUTES.SECTION_DETAILS}/${section.id}`)
+              }
+            />
+          ))}
+      </div>
     </div>
   );
 }
