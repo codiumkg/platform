@@ -9,3 +9,7 @@ export async function getLectures(): Promise<ILecture[]> {
 export async function getLectureDetails(id: number): Promise<ILecture> {
   return axios.get(`${API_LECTURES}${id}`).then(({ data }) => data);
 }
+
+export async function completeLecture(id: number) {
+  return axios.post(`${API_LECTURES}${id}/complete`).then(({ data }) => data);
+}

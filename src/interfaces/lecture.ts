@@ -19,3 +19,7 @@ export interface ILectureCreate {
   image?: string | null;
   topicId: number;
 }
+
+export interface ILectureComplete {
+  lectureId: number;
+}
