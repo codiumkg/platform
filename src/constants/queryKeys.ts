@@ -4,6 +4,7 @@ export const QUERY_KEYS = {
   SUBJECTS: "subjects",
   GROUPS: "groups",
   TOPICS: "topics",
+  TOPIC_CONTENT: "topic-content",
   SECTIONS: "sections",
   LECTURES: "lectures",
 };

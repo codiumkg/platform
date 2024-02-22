@@ -20,31 +20,35 @@ function SectionDetails() {
   });
 
   return (
-    <div className="pt-10">
-      <PageLayout title="Топики" onBackClick={() => navigate(ROUTES.HOME)}>
-        {!isLoading && !topics?.length && (
-          <div className="flex flex-col justify-center items-center w-full min-h-screen">
-            <NoDataPlaceholder />
-          </div>
-        )}
-        <div className="grid grid-cols-2 gap-8 mt-8">
-          {isLoading && (
-            <>
-              <TopicCardShimmer />
-              <TopicCardShimmer />
-              <TopicCardShimmer />
-              <TopicCardShimmer />
-              <TopicCardShimmer />
-              <TopicCardShimmer />
-              <TopicCardShimmer />
-              <TopicCardShimmer />
-            </>
-          )}
-          {(!isLoading || !isPending) &&
-            topics?.map((topic) => <TopicCard key={topic.id} topic={topic} />)}
+    <PageLayout title="Топики" onBackClick={() => navigate(ROUTES.HOME)}>
+      {!isLoading && !topics?.length && (
+        <div className="flex flex-col justify-center items-center w-full min-h-screen">
+          <NoDataPlaceholder />
         </div>
-      </PageLayout>
-    </div>
+      )}
+      <div className="grid grid-cols-2 gap-8 mt-8">
+        {isLoading && (
+          <>
+            <TopicCardShimmer />
+            <TopicCardShimmer />
+            <TopicCardShimmer />
+            <TopicCardShimmer />
+            <TopicCardShimmer />
+            <TopicCardShimmer />
+            <TopicCardShimmer />
+            <TopicCardShimmer />
+          </>
+        )}
+        {(!isLoading || !isPending) &&
+          topics?.map((topic) => (
+            <TopicCard
+              key={topic.id}
+              topic={topic}
+              onClick={() => navigate(`${ROUTES.TOPIC_DETAILS}/${topic.id}`)}
+            />
+          ))}
+      </div>
+    </PageLayout>
   );
 }
 

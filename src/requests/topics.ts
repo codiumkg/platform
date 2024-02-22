@@ -1,4 +1,4 @@
-import { ITopic } from "../interfaces/topic";
+import { ITopic, ITopicContent } from "../interfaces/topic";
 import { API_TOPICS } from "../constants/apiConstants";
 import axios from "axios";
 
@@ -18,4 +18,8 @@ export async function getTopics(
 
 export async function getTopicDetails(id: number) {
   return axios.get(`${API_TOPICS}${id}`).then(({ data }) => data);
+}
+
+export async function getTopicContent(id: number): Promise<ITopicContent[]> {
+  return axios.get(`${API_TOPICS}${id}/get-content/`).then(({ data }) => data);
 }

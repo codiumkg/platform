@@ -1,11 +1,12 @@
 import { QUERY_KEYS } from "@/constants/queryKeys";
-import { ITopic } from "@/interfaces/topic";
-import { getTopicDetails, getTopics } from "@/requests/topics";
+import { ITopic, ITopicContent } from "@/interfaces/topic";
+import { getTopicContent, getTopicDetails, getTopics } from "@/requests/topics";
 import { useQuery } from "@tanstack/react-query";
 
 interface QueryParams {
   params?: any;
   enabled?: boolean;
+  id?: number;
 }
 
 export const useTopicsQuery = ({ params, enabled }: QueryParams) => {
@@ -34,5 +35,17 @@ export const useTopicDetailsQuery = (id: number, { enabled }: QueryParams) => {
     data,
     isLoading,
     isSuccess,
+  };
+};
+
+export const useTopicContent = ({ id }: QueryParams) => {
+  const { data, isLoading } = useQuery<ITopicContent[]>({
+    queryFn: () => getTopicContent(id!),
+    queryKey: [QUERY_KEYS.TOPIC_CONTENT, id],
+  });
+
+  return {
+    data,
+    isLoading,
   };
 };

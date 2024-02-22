@@ -19,7 +19,7 @@ function SectionCard({ section, onClick }: Props) {
 
       <div className="flex w-full justify-end mt-10">
         <div className="p-4 rounded-full bg-secondary-dark border border-highlight">
-          <FaBook className="text-2xl" />
+          <FaBook className="text-2xl text-highlight-secondary" />
         </div>
       </div>
     </div>

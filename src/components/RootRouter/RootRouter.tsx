@@ -7,12 +7,14 @@ import {
 import Home from "@/pages/Home/Home";
 import RootLayout from "../RootLayout/RootLayout";
 import SectionDetails from "@/pages/Section/SectionDetails";
+import TopicContent from "@/pages/TopicContent/TopicContent";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
       <Route index element={<Home />} />
       <Route path="/section/:id" element={<SectionDetails />} />
+      <Route path="/topic/:id" element={<TopicContent />} />
     </Route>
   )
 );
