@@ -1,5 +1,4 @@
-import { GiBookmark } from "react-icons/gi";
-import { BiTask } from "react-icons/bi";
+import { BiTask, BiSolidBook } from "react-icons/bi";
 import cn from "classnames";
 
 import { TopicContentType } from "@/interfaces/common";
@@ -8,16 +7,20 @@ interface Props {
   isActive: boolean;
   type: TopicContentType;
   contentNumber: number;
+  onClick: () => void;
 }
 
 const ICON_BY_TYPE = {
-  LECTURE: <GiBookmark />,
+  LECTURE: <BiSolidBook />,
   TASK: <BiTask />,
 };
 
-function TopicContentCard({ type, contentNumber, isActive }: Props) {
+function TopicContentCard({ type, contentNumber, isActive, onClick }: Props) {
   return (
-    <div className="flex flex-col items-center cursor-pointer">
+    <div
+      className="flex flex-col items-center cursor-pointer"
+      onClick={onClick}
+    >
       <div
         className={cn(
           "p-4 rounded-full bg-secondary border hover:border-accent duration-300",

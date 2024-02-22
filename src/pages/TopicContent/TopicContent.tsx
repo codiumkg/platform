@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { ITopicContent } from "@/interfaces/topic";
 import { TopicContentType } from "@/interfaces/common";
 import LectureDetails from "./components/LectureDetails";
+import TaskDetails from "./components/TaskDetails";
 
 function TopicContent() {
   const { id } = useParams();
@@ -39,6 +40,7 @@ function TopicContent() {
               isActive={content.id === activeContent?.id}
               type={content.type}
               contentNumber={content.orderNumber}
+              onClick={() => setActiveContent(content)}
             />
           ))}
       </div>
@@ -46,7 +48,9 @@ function TopicContent() {
       <div>
         {activeContent?.type === TopicContentType.LECTURE ? (
           <LectureDetails lecture={activeContent?.lecture} />
-        ) : null}
+        ) : (
+          <TaskDetails task={activeContent?.task} />
+        )}
       </div>
     </PageLayout>
   );

@@ -7,9 +7,11 @@ interface Props {
 }
 
 function LectureDetails({ lecture }: Props) {
+  if (!lecture) return null;
+
   return (
-    <div className="p-8 bg-secondary rounded-xl">
-      <h1 className="text-3xl font-bold mb-6">{lecture?.title}</h1>
+    <div className="p-8">
+      <h1 className="text-4xl md:text-5xl font-bold mb-6">{lecture?.title}</h1>
       <div
         className="lecture-content"
         dangerouslySetInnerHTML={{ __html: lecture?.content || "" }}
