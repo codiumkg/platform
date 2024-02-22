@@ -5,9 +5,14 @@ import styles from "./LoadingSpinner.module.scss";
 interface Props {
   size?: "s" | "m" | "l" | "xl";
   light?: boolean;
+  color?: string;
 }
 
-export default function LoadingSpinner({ size = "s", light = false }: Props) {
+export default function LoadingSpinner({
+  size = "s",
+  light = false,
+  color,
+}: Props) {
   return (
     <div
       className={cn(
@@ -15,6 +20,7 @@ export default function LoadingSpinner({ size = "s", light = false }: Props) {
         styles[`size-${size}`],
         light ? styles.light : ""
       )}
+      style={{ borderTopColor: color ? color : "" }}
     ></div>
   );
 }

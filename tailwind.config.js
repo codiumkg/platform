@@ -16,7 +16,8 @@ export default {
       'text': '#f7e3db',
       'secondary-text': '#d6cbc6',
       'highlight': '#313131',
-      'highlight-secondary': "#464646"
+      'highlight-secondary': "#464646",
+      "transparent": "rgba(0, 0, 0, 0)"
     },
     extend: {},
   },
