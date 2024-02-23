@@ -6,6 +6,7 @@ export interface ILecture {
   content: string;
   number: number;
   image: string | null;
+  isCompleted: boolean;
   topicId: number;
   topic: ITopic;
   createdAt: string;

@@ -1,10 +1,12 @@
 import { BiTask, BiSolidBook } from "react-icons/bi";
+import { IoMdCheckmarkCircle } from "react-icons/io";
 import cn from "classnames";
 
 import { TopicContentType } from "@/interfaces/common";
 
 interface Props {
   isActive: boolean;
+  isCompleted: boolean;
   type: TopicContentType;
   contentNumber: number;
   onClick: () => void;
@@ -15,7 +17,13 @@ const ICON_BY_TYPE = {
   TASK: <BiTask />,
 };
 
-function TopicContentCard({ type, contentNumber, isActive, onClick }: Props) {
+function TopicContentCard({
+  type,
+  contentNumber,
+  isActive,
+  isCompleted,
+  onClick,
+}: Props) {
   return (
     <div
       className="flex flex-col items-center cursor-pointer"
@@ -23,17 +31,18 @@ function TopicContentCard({ type, contentNumber, isActive, onClick }: Props) {
     >
       <div
         className={cn(
-          "p-4 rounded-full bg-secondary border hover:border-accent duration-300",
+          "p-4 rounded-full bg-secondary border hover:border-accent duration-300 relative",
           isActive ? "border-accent" : "border-transparent"
         )}
       >
         <div
           className={cn(
-            "text-xl",
+            "text-xl relative",
+            isCompleted ? (!isActive ? "text-accent-secondary" : "") : "",
             isActive ? "text-accent" : "text-highlight-secondary"
           )}
         >
-          {ICON_BY_TYPE[type]}
+          {!isCompleted ? ICON_BY_TYPE[type] : <IoMdCheckmarkCircle />}
         </div>
       </div>
       <div

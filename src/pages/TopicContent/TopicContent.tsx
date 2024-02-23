@@ -63,7 +63,8 @@ function TopicContent() {
     if (
       activeContent &&
       activeContent.type === TopicContentType.LECTURE &&
-      activeContent.lecture
+      activeContent.lecture &&
+      !activeContent.lecture.isCompleted
     ) {
       completeLecture(activeContent.lecture.id);
     }
@@ -95,6 +96,7 @@ function TopicContent() {
           topicContent?.map((content) => (
             <TopicContentCard
               key={content.id}
+              isCompleted={content.lecture?.isCompleted || false}
               isActive={content.id === activeContent?.id}
               type={content.type}
               contentNumber={content.orderNumber}
