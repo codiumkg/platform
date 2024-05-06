@@ -19,7 +19,13 @@ export default {
           extend: "dark",
           layout: {},
           colors: {
-
+            content1: "#23211f",
+            content2: "#23211f",
+            content3: "#23211f",
+            content4: "#23211f",
+            default: {
+              // DEFAULT: "#232119",
+            },
             background: {
               DEFAULT: "#1a1817",
               900: '#f3f2f1',

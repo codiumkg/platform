@@ -7,6 +7,14 @@ export interface ITask {
   tip?: string;
   topicId: number;
   topic: ITopic;
+  answers: IAnswer[];
   createdAt: string;
   updatedAt: string;
+}
+
+export interface IAnswer {
+  id: number;
+  taskId: number;
+  text: string;
+  isCorrectAnswer: boolean;
 }
