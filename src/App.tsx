@@ -3,7 +3,7 @@ import RootRouter from "./components/RootRouter/RootRouter";
 
 function App() {
   return (
-    <main className="flex flex-col w-screen min-h-screen bg-primary">
+    <main className="flex flex-col w-screen min-h-screen codium-dark bg-background text-foreground">
       <Toaster />
       <RootRouter />
     </main>

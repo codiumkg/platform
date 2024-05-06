@@ -15,7 +15,7 @@ function InfoSection() {
             <h1 className="text-4xl md:text-6xl mb-6 font-bold">
               {data?.group?.subject.title}
             </h1>
-            <div className="bg-accent-secondary rounded-full text-primary text-md md:text-2xl px-4 md:px-10 py-3 grid place-content-center">
+            <div className="bg-secondary rounded-full text-background text-md md:text-2xl px-4 md:px-10 py-3 grid place-content-center">
               {data?.group?.title}
             </div>
           </>
@@ -28,10 +28,10 @@ function InfoSection() {
             text="0%"
             styles={buildStyles({
               strokeLinecap: "butt",
-              textColor: "var(--accent-color)",
-              backgroundColor: "var(--primary-color)",
-              pathColor: "var(--accent-secondary-color)",
-              trailColor: "var(--secondary-color)",
+              textColor: "hsl(var(--nextui-foreground))",
+              backgroundColor: "hsl(var(--nextui-background))",
+              pathColor: "hsl(var(--nextui-secondary))",
+              trailColor: "hsl(var(--nextui-bgSecondary))",
             })}
           />
         </div>

@@ -84,7 +84,10 @@ function TopicContent() {
 
   return (
     <PageLayout title="Задачи и лекции" onBackClick={() => navigate(-1)}>
-      <div className="flex w-full overflow-x-scroll max-h-30 p-8 gap-4">
+      <div
+        className="flex w-full overflow-x-scroll max-h-30 p-8 gap-4"
+        style={{ scrollbarWidth: "none" }}
+      >
         {isLoading && (
           <>
             {Array.from(Array(12)).map((_, index) => (
@@ -116,7 +119,7 @@ function TopicContent() {
       {!isLastContent && (
         <div className="flex justify-center p-10">
           <button
-            className="bg-accent text-secondary font-bold px-10 py-4 rounded-full"
+            className="bg-primary text-bgSecondary font-bold px-10 py-4 rounded-full"
             onClick={handleNextClick}
           >
             Дальше

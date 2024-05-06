@@ -3,7 +3,7 @@ import { toast } from "react-hot-toast";
 function showSuccessNotification(text: string = "Успешно") {
   toast.success(text, {
     style: {
-      background: "var(--secondary-color)",
+      background: "var(--bg-secondary-color)",
       color: "var(--text-color)",
     },
   });
@@ -12,7 +12,7 @@ function showSuccessNotification(text: string = "Успешно") {
 function showErrorNotification(text: string = "Ошибка") {
   toast.error(text, {
     style: {
-      background: "var(--secondary-color)",
+      background: "var(--bg-secondary-color)",
       color: "var(--text-color)",
     },
   });

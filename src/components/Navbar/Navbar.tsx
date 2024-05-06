@@ -6,10 +6,15 @@ function Navbar() {
 
   return (
     <div className="fixed flex justify-end w-screen p-3 pointer-events-none">
-      <div className="h-16 bg-secondary border border-highlight rounded-full p-4">
+      <div className="h-16 bg-bgSecondary border border-highlight rounded-full p-4">
         <div className="flex flex-row items-center">
-          <img src={CodiumLogo} className="w-8 h-8 mr-3" />
-          <h1 className="text-sm">{userData?.username}</h1>
+          <img
+            src={CodiumLogo}
+            className={`w-8 h-8 ${userData ? "mr-3" : ""}`}
+          />
+          {userData?.username && (
+            <h1 className="text-sm">{userData?.username}</h1>
+          )}
         </div>
       </div>
     </div>

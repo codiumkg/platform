@@ -31,15 +31,15 @@ function TopicContentCard({
     >
       <div
         className={cn(
-          "p-4 rounded-full bg-secondary border hover:border-accent duration-300 relative",
-          isActive ? "border-accent" : "border-transparent"
+          "p-4 rounded-full bg-bgSecondary border hover:border-primary duration-300 relative",
+          isActive ? "border-primary" : "border-transparent"
         )}
       >
         <div
           className={cn(
             "text-xl relative",
-            isCompleted ? (!isActive ? "text-accent-secondary" : "") : "",
-            isActive ? "text-accent" : "text-highlight-secondary"
+            isCompleted ? (!isActive ? "text-primary-secondary" : "") : "",
+            isActive ? "text-primary" : "text-highlight-secondary"
           )}
         >
           {!isCompleted ? ICON_BY_TYPE[type] : <IoMdCheckmarkCircle />}
@@ -48,7 +48,7 @@ function TopicContentCard({
       <div
         className={cn(
           "mt-2 text-sm font-thin",
-          isActive ? "text-accent" : "text-highlight-secondary"
+          isActive ? "text-primary" : "text-highlight-secondary"
         )}
       >
         {contentNumber}

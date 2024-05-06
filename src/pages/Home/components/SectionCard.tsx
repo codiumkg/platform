@@ -9,7 +9,7 @@ interface Props {
 function SectionCard({ section, onClick }: Props) {
   return (
     <div
-      className="flex flex-col p-4 rounded-xl bg-secondary border border-highlight hover:border-highlight-secondary duration-300"
+      className="flex flex-col p-4 rounded-xl bg-bgSecondary border border-highlight hover:border-highlight-secondary duration-300"
       onClick={onClick}
     >
       <div>
