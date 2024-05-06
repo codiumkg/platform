@@ -1,4 +1,4 @@
-import { QUERY_KEYS } from "../constants/queryKeys";
+import { ApiConstants } from "@/constants/apiConstants";
 import { ISubject } from "../interfaces/subject";
 import { getSubjectDetails, getSubjects } from "../requests/subjects";
 import { useQuery } from "@tanstack/react-query";
@@ -12,7 +12,7 @@ export const useSubjectsQuery = ({ params, enabled }: QueryParams) => {
   const { data, isFetching, isSuccess, isError, refetch } = useQuery<
     ISubject[]
   >({
-    queryKey: [QUERY_KEYS.SUBJECTS, params?.search],
+    queryKey: [ApiConstants.SUBJECTS, params?.search],
     queryFn: () => getSubjects(params?.search || ""),
     refetchOnWindowFocus: false,
     enabled,
@@ -33,7 +33,7 @@ export const useSubjectDetailsQuery = (
 ) => {
   const { data, isLoading, isSuccess } = useQuery({
     queryFn: () => getSubjectDetails(id),
-    queryKey: [QUERY_KEYS.SUBJECTS, id],
+    queryKey: [ApiConstants.SUBJECTS, id],
     enabled,
   });
 

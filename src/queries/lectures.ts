@@ -1,4 +1,4 @@
-import { QUERY_KEYS } from "@/constants/queryKeys";
+import { ApiConstants } from "@/constants/apiConstants";
 import { ILecture } from "@/interfaces/lecture";
 import {
   completeLecture,
@@ -10,7 +10,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 export const useLecturesQuery = () => {
   const { data, isLoading } = useQuery({
     queryFn: () => getLectures(),
-    queryKey: [QUERY_KEYS.LECTURES],
+    queryKey: [ApiConstants.LECTURES],
     refetchOnWindowFocus: false,
     staleTime: 30 * 1000,
   });
@@ -31,7 +31,7 @@ export const useLectureDetailsQuery = (
 ) => {
   const { data, isLoading, isSuccess } = useQuery<ILecture>({
     queryFn: () => getLectureDetails(id),
-    queryKey: [QUERY_KEYS.LECTURES, id],
+    queryKey: [ApiConstants.LECTURES, id],
     enabled,
   });
 

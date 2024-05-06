@@ -1,11 +1,11 @@
 import { IUserData } from "@/interfaces/auth";
 import { useQuery } from "@tanstack/react-query";
-import { QUERY_KEYS } from "../constants/queryKeys";
 import getUserData from "../requests/auth/getUserData";
+import { ApiConstants } from "@/constants/apiConstants";
 
 export const useUserData = () => {
   const { data, isFetching, isSuccess, isError } = useQuery<IUserData>({
-    queryKey: [QUERY_KEYS.USERDATA],
+    queryKey: [ApiConstants.USERDATA],
     queryFn: getUserData,
   });
 

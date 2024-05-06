@@ -1,10 +1,10 @@
 import axios from "axios";
-import { API_SUBJECTS } from "../constants/apiConstants";
+import { ApiConstants } from "../constants/apiConstants";
 import { ISubject } from "../interfaces/subject";
 
 export async function getSubjects(search?: string): Promise<ISubject[]> {
   return axios
-    .get(API_SUBJECTS, {
+    .get(ApiConstants.SUBJECTS, {
       params: {
         title: search,
       },
@@ -13,5 +13,5 @@ export async function getSubjects(search?: string): Promise<ISubject[]> {
 }
 
 export async function getSubjectDetails(id: number): Promise<ISubject> {
-  return axios.get(`${API_SUBJECTS}${id}`).then(({ data }) => data);
+  return axios.get(`${ApiConstants.SUBJECTS}${id}`).then(({ data }) => data);
 }

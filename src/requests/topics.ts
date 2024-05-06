@@ -1,5 +1,5 @@
 import { ITopic, ITopicContent } from "../interfaces/topic";
-import { API_TOPICS } from "../constants/apiConstants";
+import { ApiConstants } from "../constants/apiConstants";
 import axios from "axios";
 
 export async function getTopics(
@@ -7,7 +7,7 @@ export async function getTopics(
   sectionId?: number
 ): Promise<ITopic[]> {
   return axios
-    .get(API_TOPICS, {
+    .get(ApiConstants.TOPICS, {
       params: {
         title: search,
         sectionId: sectionId,
@@ -17,9 +17,11 @@ export async function getTopics(
 }
 
 export async function getTopicDetails(id: number) {
-  return axios.get(`${API_TOPICS}${id}`).then(({ data }) => data);
+  return axios.get(`${ApiConstants.TOPICS}${id}`).then(({ data }) => data);
 }
 
 export async function getTopicContent(id: number): Promise<ITopicContent[]> {
-  return axios.get(`${API_TOPICS}${id}/get-content/`).then(({ data }) => data);
+  return axios
+    .get(`${ApiConstants.TOPICS}${id}/get-content/`)
+    .then(({ data }) => data);
 }

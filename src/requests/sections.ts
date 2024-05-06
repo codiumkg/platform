@@ -1,10 +1,10 @@
 import { ISection } from "@/interfaces/section";
-import { API_SECTIONS } from "../constants/apiConstants";
+import { ApiConstants } from "../constants/apiConstants";
 import axios from "axios";
 
 export async function getSections(search?: string): Promise<ISection[]> {
   return axios
-    .get(API_SECTIONS, {
+    .get(ApiConstants.SECTIONS, {
       params: {
         title: search,
       },
@@ -13,5 +13,5 @@ export async function getSections(search?: string): Promise<ISection[]> {
 }
 
 export async function getSectionDetails(id: number): Promise<ISection> {
-  return axios.get(`${API_SECTIONS}${id}`).then(({ data }) => data);
+  return axios.get(`${ApiConstants.SECTIONS}${id}`).then(({ data }) => data);
 }

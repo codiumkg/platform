@@ -1,4 +1,4 @@
-import { QUERY_KEYS } from "@/constants/queryKeys";
+import { ApiConstants } from "@/constants/apiConstants";
 import { ITopic, ITopicContent } from "@/interfaces/topic";
 import { getTopicContent, getTopicDetails, getTopics } from "@/requests/topics";
 import { useQuery } from "@tanstack/react-query";
@@ -12,7 +12,7 @@ interface QueryParams {
 export const useTopicsQuery = ({ params, enabled }: QueryParams) => {
   const { data, isLoading, refetch } = useQuery({
     queryFn: () => getTopics(params?.search || "", params?.sectionId),
-    queryKey: [QUERY_KEYS.TOPICS, params?.title, params?.sectionId],
+    queryKey: [ApiConstants.TOPICS, params?.title, params?.sectionId],
     refetchOnWindowFocus: false,
     enabled,
   });
@@ -27,7 +27,7 @@ export const useTopicsQuery = ({ params, enabled }: QueryParams) => {
 export const useTopicDetailsQuery = (id: number, { enabled }: QueryParams) => {
   const { data, isLoading, isSuccess } = useQuery<ITopic>({
     queryFn: () => getTopicDetails(id),
-    queryKey: [QUERY_KEYS.TOPICS, id],
+    queryKey: [ApiConstants.TOPICS, id],
     enabled,
   });
 
@@ -41,7 +41,7 @@ export const useTopicDetailsQuery = (id: number, { enabled }: QueryParams) => {
 export const useTopicContent = ({ id }: QueryParams) => {
   const { data, isLoading } = useQuery<ITopicContent[]>({
     queryFn: () => getTopicContent(id!),
-    queryKey: [QUERY_KEYS.TOPIC_CONTENT, id],
+    queryKey: [ApiConstants.TOPIC_CONTENT(id!)],
   });
 
   return {

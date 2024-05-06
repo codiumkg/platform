@@ -1,4 +1,4 @@
-import { QUERY_KEYS } from "@/constants/queryKeys";
+import { ApiConstants } from "@/constants/apiConstants";
 import { getSectionDetails, getSections } from "@/requests/sections";
 import { useQuery } from "@tanstack/react-query";
 
@@ -10,7 +10,7 @@ interface QueryParams {
 export const useSectionsQuery = ({ params, enabled }: QueryParams) => {
   const { data, isPending, refetch } = useQuery({
     queryFn: () => getSections(params?.search || ""),
-    queryKey: [QUERY_KEYS.SECTIONS, params?.title],
+    queryKey: [ApiConstants.SECTIONS, params?.title],
     refetchOnWindowFocus: false,
     enabled,
   });
@@ -28,7 +28,7 @@ export const useSectionDetailsQuery = (
 ) => {
   const { data, isPending, isSuccess } = useQuery({
     queryFn: () => getSectionDetails(id),
-    queryKey: [QUERY_KEYS.SECTIONS, id],
+    queryKey: [ApiConstants.SECTIONS, id],
     enabled,
   });
 

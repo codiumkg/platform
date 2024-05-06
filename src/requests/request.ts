@@ -26,7 +26,6 @@ axios.interceptors.response.use(
       throw new ApiError("Нет доступа к ресурсу", 403);
     } else if (error.response.status === 401) {
       localStorage.removeItem(StorageKeys.TOKEN);
-
       throw new ApiError("Пожалуйста авторизуйтесь", 401);
     } else {
       return Promise.reject(error.response || error.message);
