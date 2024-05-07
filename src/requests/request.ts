@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { StorageKeys } from "../constants/storageKeys";
 import axios from "axios";
 
@@ -27,6 +28,8 @@ axios.interceptors.response.use(
     } else if (error.response.status === 401) {
       localStorage.removeItem(StorageKeys.TOKEN);
       throw new ApiError("Пожалуйста авторизуйтесь", 401);
+    } else if (error.response.status === 400) {
+      toast.error(error.response.message || "Произошла ошибка");
     } else {
       return Promise.reject(error.response || error.message);
     }

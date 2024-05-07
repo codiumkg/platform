@@ -12,5 +12,6 @@ export class ApiConstants {
   static TOPIC_CONTENT = (topicId: number) =>
     this.BASE_URL.concat(`/topics/${topicId}/get-content`);
   static LECTURES = this.BASE_URL.concat("/lectures/");
-  static QUIZZES = this.BASE_URL.concat("/quizzes/");
+  static CHECK_ANSWER = (answerId: number) =>
+    this.BASE_URL.concat(`/answers/${answerId}/check-answer`);
 }

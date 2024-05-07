@@ -18,3 +18,8 @@ export interface IAnswer {
   text: string;
   isCorrectAnswer: boolean;
 }
+
+export interface ICheckAnswer {
+  isCorrect: boolean;
+  correctAnswerExplanation: string;
+}
