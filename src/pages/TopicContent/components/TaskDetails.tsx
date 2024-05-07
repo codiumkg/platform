@@ -1,3 +1,4 @@
+import { Icons } from "@/components/Icons";
 import { useNotification } from "@/hooks/useNotification";
 import { IAnswer, ITask } from "@/interfaces/task";
 import { useCheckAnswer } from "@/queries/tasks";
@@ -33,6 +34,12 @@ function TaskDetails({ task }: Props) {
 
   return (
     <div className="flex flex-col gap-4 items-center justify-center py-10 lg:px-32">
+      {!!task.correctAnswerExplanation && task.isCompleted && (
+        <div className="flex gap-2 p-4 text-secondary w-full bg-bgSecondary rounded-xl border-1 border-secondary">
+          {<Icons.EXCLAMATION className="text-xl" />}{" "}
+          {task.correctAnswerExplanation}
+        </div>
+      )}
       <div className="flex flex-col items-center p-6 bg-bgSecondary rounded-xl w-full">
         <div dangerouslySetInnerHTML={{ __html: task?.text || "" }} />
       </div>
@@ -49,14 +56,16 @@ function TaskDetails({ task }: Props) {
           </Button>
         ))}
       </div>
-      <Button
-        color="primary"
-        isDisabled={!selectedAnswer}
-        isLoading={isPending}
-        onPress={handleCheckAnswer}
-      >
-        Подтвердить
-      </Button>
+      {!task.isCompleted && (
+        <Button
+          color="primary"
+          isDisabled={!selectedAnswer}
+          isLoading={isPending}
+          onPress={handleCheckAnswer}
+        >
+          Подтвердить
+        </Button>
+      )}
     </div>
   );
 }

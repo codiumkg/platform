@@ -7,6 +7,8 @@ export interface ITask {
   tip?: string;
   topicId: number;
   topic: ITopic;
+  isCompleted: boolean;
+  correctAnswerExplanation: string | null;
   answers: IAnswer[];
   createdAt: string;
   updatedAt: string;
