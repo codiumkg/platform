@@ -9,6 +9,7 @@ export interface ITask {
   topic: ITopic;
   isCompleted: boolean;
   correctAnswerExplanation: string | null;
+  userAnswer: IUserAnswer | null;
   answers: IAnswer[];
   createdAt: string;
   updatedAt: string;
@@ -24,4 +25,11 @@ export interface IAnswer {
 export interface ICheckAnswer {
   isCorrect: boolean;
   correctAnswerExplanation: string;
+}
+
+export interface IUserAnswer {
+  answer: IAnswer;
+  userId: number;
+  text: string;
+  taskId: number;
 }

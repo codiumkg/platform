@@ -3,14 +3,16 @@ import { useNotification } from "@/hooks/useNotification";
 import { IAnswer, ITask } from "@/interfaces/task";
 import { useCheckAnswer } from "@/queries/tasks";
 import { Button } from "@nextui-org/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface Props {
   task?: ITask;
 }
 
 function TaskDetails({ task }: Props) {
-  const [selectedAnswer, setSelectedAnswer] = useState<IAnswer | null>(null);
+  const [selectedAnswer, setSelectedAnswer] = useState<IAnswer | null>(
+    task?.userAnswer?.answer || null
+  );
 
   const { showSuccessNotification, showErrorNotification } = useNotification();
 
@@ -24,11 +26,37 @@ function TaskDetails({ task }: Props) {
     },
   });
 
+  const getButtonStyles = (answer: IAnswer) => {
+    if (selectedAnswer?.id === answer.id) {
+      if (task?.isCompleted) {
+        return selectedAnswer?.isCorrectAnswer
+          ? "bg-secondary text-background"
+          : "bg-danger";
+      }
+
+      return "bg-secondary text-background";
+    }
+
+    if (answer.isCorrectAnswer) return "bg-secondary text-background";
+  };
+
+  const handleOptionSelect = (answer: IAnswer) => {
+    if (task?.isCompleted) return;
+
+    setSelectedAnswer(answer);
+  };
+
   const handleCheckAnswer = () => {
     if (!selectedAnswer) return;
 
     checkAnswer(selectedAnswer.id);
   };
+
+  useEffect(() => {
+    if (task?.userAnswer) {
+      setSelectedAnswer(task.userAnswer.answer);
+    }
+  }, [task?.userAnswer]);
 
   if (!task) return null;
 
@@ -48,10 +76,9 @@ function TaskDetails({ task }: Props) {
           {task.answers.map((answer) => (
             <Button
               key={answer.id}
-              onPress={() => setSelectedAnswer(answer)}
-              className={
-                selectedAnswer === answer ? "bg-secondary text-background" : ""
-              }
+              onPress={() => handleOptionSelect(answer)}
+              className={getButtonStyles(answer)}
+              isDisabled={task?.isCompleted}
             >
               {answer.text}
             </Button>
