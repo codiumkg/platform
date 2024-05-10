@@ -83,7 +83,7 @@ export default function Login() {
     <div className="flex flex-col items-center justify-center h-screen">
       <div className="p-4">
         <h1 className="text-2xl">
-          Вход в <span className="text-primary font-bold">Codium Office</span>
+          Вход в <span className="text-primary font-bold">Codium Platform</span>
         </h1>
       </div>
       <div className="w-[280px] md:w-[360px]">

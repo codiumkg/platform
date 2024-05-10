@@ -11,6 +11,7 @@ import TaskDetails from "./components/TaskDetails";
 import { getLastViewedContentId, setLastViewedContentId } from "@/utils/common";
 import { useLectureComplete } from "@/queries/lectures";
 import { useNotification } from "@/hooks/useNotification";
+import { Button } from "@nextui-org/react";
 
 function TopicContent() {
   const { id } = useParams();
@@ -25,15 +26,14 @@ function TopicContent() {
 
   const { showErrorNotification, showSuccessNotification } = useNotification();
 
-  const { mutate: completeLecture, isSuccess: isCompleted } =
-    useLectureComplete({
-      onSuccess: () => {
-        showSuccessNotification("Лекция успешно завершена");
-      },
-      onError: () => {
-        showErrorNotification("Не удалось сохранить прогресс лекции");
-      },
-    });
+  const { mutate: completeLecture } = useLectureComplete({
+    onSuccess: () => {
+      showSuccessNotification("Лекция успешно завершена");
+    },
+    onError: () => {
+      showErrorNotification("Не удалось сохранить прогресс лекции");
+    },
+  });
 
   const isLastContent =
     (activeContent?.orderNumber ?? 1) >= (topicContent?.length ?? 0);
@@ -118,12 +118,9 @@ function TopicContent() {
 
       {!isLastContent && (
         <div className="flex justify-center p-10">
-          <button
-            className="bg-primary text-bgSecondary font-bold px-10 py-4 rounded-full"
-            onClick={handleNextClick}
-          >
+          <Button onPress={handleNextClick} color="primary" size="lg">
             Дальше
-          </button>
+          </Button>
         </div>
       )}
     </PageLayout>

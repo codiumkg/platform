@@ -8,6 +8,7 @@ export interface ITask {
   topicId: number;
   topic: ITopic;
   isCompleted: boolean;
+  isUserAnswer: boolean;
   correctAnswerExplanation: string | null;
   userAnswer: IUserAnswer | null;
   answers: IAnswer[];

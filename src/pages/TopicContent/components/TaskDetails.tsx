@@ -2,7 +2,7 @@ import { Icons } from "@/components/Icons";
 import { useNotification } from "@/hooks/useNotification";
 import { IAnswer, ITask } from "@/interfaces/task";
 import { useCheckAnswer } from "@/queries/tasks";
-import { Button } from "@nextui-org/react";
+import { Button, Textarea } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 
 interface Props {
@@ -14,7 +14,13 @@ function TaskDetails({ task }: Props) {
     task?.userAnswer?.answer || null
   );
 
+  const [customAnswer, setCustomAnswer] = useState("");
+
   const { showSuccessNotification, showErrorNotification } = useNotification();
+
+  const isButtonDisabled = !task?.isUserAnswer
+    ? !selectedAnswer
+    : !customAnswer;
 
   const { mutate: checkAnswer, isPending } = useCheckAnswer({
     onSuccess: (data) => {
@@ -47,9 +53,11 @@ function TaskDetails({ task }: Props) {
   };
 
   const handleCheckAnswer = () => {
-    if (!selectedAnswer) return;
+    if (!task?.isUserAnswer) {
+      if (!selectedAnswer) return;
 
-    checkAnswer(selectedAnswer.id);
+      checkAnswer(selectedAnswer.id);
+    }
   };
 
   useEffect(() => {
@@ -62,7 +70,7 @@ function TaskDetails({ task }: Props) {
 
   return (
     <div className="flex flex-col gap-4 items-center justify-center py-10">
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 lg:w-[45%]">
         {!!task.correctAnswerExplanation && task.isCompleted && (
           <div className="flex gap-2 p-4 text-secondary w-full bg-bgSecondary rounded-xl border-1 border-secondary">
             {<Icons.EXCLAMATION className="text-xl" />}{" "}
@@ -72,22 +80,34 @@ function TaskDetails({ task }: Props) {
         <div className="flex flex-col items-center p-6 bg-bgSecondary rounded-xl w-full">
           <div dangerouslySetInnerHTML={{ __html: task?.text || "" }} />
         </div>
-        <div className="grid w-full gap-4 grid-cols-2">
-          {task.answers.map((answer) => (
-            <Button
-              key={answer.id}
-              onPress={() => handleOptionSelect(answer)}
-              className={getButtonStyles(answer)}
-              isDisabled={task?.isCompleted}
-            >
-              {answer.text}
-            </Button>
-          ))}
-        </div>
+        {!task.isUserAnswer ? (
+          <div className="grid w-full gap-4 grid-cols-2">
+            {task.answers.map((answer) => (
+              <Button
+                key={answer.id}
+                onPress={() => handleOptionSelect(answer)}
+                className={getButtonStyles(answer)}
+                isDisabled={task?.isCompleted}
+              >
+                {answer.text}
+              </Button>
+            ))}
+          </div>
+        ) : (
+          <div className="flex">
+            <Textarea
+              label="Ответ"
+              placeholder="Введите ответ"
+              classNames={{ input: "min-h-32" }}
+              onChange={(e) => setCustomAnswer(e.target.value)}
+              autoFocus
+            />
+          </div>
+        )}
         {!task.isCompleted && (
           <Button
             color="primary"
-            isDisabled={!selectedAnswer}
+            isDisabled={isButtonDisabled}
             isLoading={isPending}
             onPress={handleCheckAnswer}
           >
