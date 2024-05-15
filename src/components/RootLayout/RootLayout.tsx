@@ -3,7 +3,6 @@ import Navbar from "../Navbar/Navbar";
 import useAuth from "@/hooks/useAuth";
 import { useEffect } from "react";
 import { ROUTES } from "@/constants/routes";
-import { useNotification } from "@/hooks/useNotification";
 
 function RootLayout() {
   const navigate = useNavigate();
@@ -12,14 +11,12 @@ function RootLayout() {
 
   const { pathname } = useLocation();
 
-  const { showErrorNotification } = useNotification();
-
   useEffect(() => {
     if (!checkIsLoggedIn() && !pathname.includes("login")) {
       navigate(ROUTES.LOGIN);
       logout();
     }
-  }, [navigate, checkIsLoggedIn, logout, showErrorNotification, pathname]);
+  }, [navigate, checkIsLoggedIn, logout, pathname]);
 
   return (
     <div className="flex flex-col w-screen items-center text-text px-4 md:px-20 lg:px-64">
