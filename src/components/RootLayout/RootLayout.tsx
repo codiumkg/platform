@@ -17,7 +17,6 @@ function RootLayout() {
   useEffect(() => {
     if (!checkIsLoggedIn() && !pathname.includes("login")) {
       navigate(ROUTES.LOGIN);
-      showErrorNotification("Пожалуйста авторизуйтесь");
       logout();
     }
   }, [navigate, checkIsLoggedIn, logout, showErrorNotification, pathname]);
