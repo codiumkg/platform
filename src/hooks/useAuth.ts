@@ -2,6 +2,7 @@ import { ApiConstants } from "@/constants/apiConstants";
 import { ROUTES } from "@/constants/routes";
 import { StorageKeys } from "@/constants/storageKeys";
 import { useQueryClient } from "@tanstack/react-query";
+import { useCallback } from "react";
 import { useNavigate } from "react-router";
 
 export default function useAuth() {
@@ -9,11 +10,11 @@ export default function useAuth() {
 
   const queryClient = useQueryClient();
 
-  const checkIsLoggedIn = () => {
+  const checkIsLoggedIn = useCallback(() => {
     const token = getTokenFromStorage();
 
     return !!token;
-  };
+  }, []);
 
   const getTokenFromStorage = () => {
     const token = localStorage.getItem(StorageKeys.TOKEN);
@@ -29,7 +30,7 @@ export default function useAuth() {
     localStorage.removeItem(StorageKeys.TOKEN);
   };
 
-  const logout = () => {
+  const logout = useCallback(() => {
     removeTokenFromStorage();
     localStorage.removeItem(StorageKeys.LAST_VISITED_CONTENT_ID);
     queryClient.invalidateQueries({
@@ -37,7 +38,7 @@ export default function useAuth() {
       refetchType: "all",
     });
     navigate(ROUTES.LOGIN);
-  };
+  }, [navigate, queryClient]);
 
   return {
     getTokenFromStorage,
