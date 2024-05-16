@@ -12,25 +12,25 @@ function InfoSection() {
   const { data: progress, isLoading } = useUserProgress();
 
   return (
-    <div className="flex gap-4 justify-between items-center h-96">
+    <div className="flex gap-4 justify-between items-center py-20">
       <div className="flex flex-col justify-center min-w-48">
         {isFetching && <LoadingSpinner light size="l" />}
         {!isFetching && (
           <>
-            <h1 className="text-4xl md:text-6xl mb-6 font-bold">
+            <h1 className="text-4xl md:text-6xl mb-4 font-bold">
               {data?.group?.subject.title}
             </h1>
-            <div className="bg-secondary rounded-full text-background text-md md:text-2xl px-4 md:px-10 py-3 grid place-content-center">
+            <div className="bg-secondary rounded-full text-background text-sm md:text-2xl px-2 md:px-8 py-2 grid place-content-center">
               {data?.group?.title}
             </div>
           </>
         )}
       </div>
-      <div className="flex flex-col gap-4">
-        <div className="w-40 h-40">
+      <div className="flex flex-col items-center gap-4">
+        <div className="w-32 h-32 md:w-52 md:h-52">
           <CircularProgressbar
             value={progress?.percent || 0}
-            text={!isLoading ? progress?.percent + "%" : "Загрузка..."}
+            text={!isLoading ? `${progress?.percent}%` : "Загрузка..."}
             styles={buildStyles({
               textSize: "14px",
               strokeLinecap: "butt",

@@ -18,11 +18,11 @@ function Navbar() {
       {checkIsLoggedIn() && (
         <Dropdown aria-label="Dropdown">
           <DropdownTrigger aria-label="trigger">
-            <div className="h-16 bg-bgSecondary border border-highlight rounded-full p-4">
+            <div className="h-13 md:h-16 bg-bgSecondary border border-highlight rounded-full p-4 cursor-pointer">
               <div className="flex flex-row items-center">
                 <img
                   src={CodiumLogo}
-                  className={`w-8 h-8 ${userData ? "mr-3" : ""}`}
+                  className={`w-5 h-5 md:w-8 md:h-8 ${userData ? "mr-3" : ""}`}
                 />
                 {userData?.username && (
                   <h1 className="text-sm">{userData?.username}</h1>

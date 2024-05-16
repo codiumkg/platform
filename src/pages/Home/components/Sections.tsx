@@ -13,7 +13,7 @@ function Sections() {
   return (
     <div>
       <h1 className="text-2xl font-bold">Разделы</h1>
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-6 py-10">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-6 py-6">
         {isPending && (
           <>
             <SectionCardShimmer />
