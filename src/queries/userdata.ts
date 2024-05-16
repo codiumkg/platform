@@ -7,7 +7,11 @@ import { ApiError } from "@/requests/request";
 import { ROUTES } from "@/constants/routes";
 import { useNotification } from "@/hooks/useNotification";
 
-export const useUserData = () => {
+interface Params {
+  enabled?: boolean;
+}
+
+export const useUserData = (params?: Params) => {
   const navigate = useNavigate();
 
   const { pathname } = useLocation();
@@ -28,6 +32,7 @@ export const useUserData = () => {
         return Promise.reject();
       }
     },
+    enabled: params?.enabled,
   });
 
   return {

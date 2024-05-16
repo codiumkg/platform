@@ -2,9 +2,12 @@ import { useUserData } from "@/queries/userdata";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+import useAuth from "@/hooks/useAuth";
 
 function InfoSection() {
-  const { data, isFetching } = useUserData();
+  const { checkIsLoggedIn } = useAuth();
+
+  const { data, isFetching } = useUserData({ enabled: checkIsLoggedIn() });
 
   return (
     <div className="flex gap-4 justify-between items-center p-6 h-96">

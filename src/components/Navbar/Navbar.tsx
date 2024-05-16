@@ -9,9 +9,9 @@ import {
 } from "@nextui-org/react";
 
 function Navbar() {
-  const { data: userData } = useUserData();
-
   const { logout, checkIsLoggedIn } = useAuth();
+
+  const { data: userData } = useUserData({ enabled: checkIsLoggedIn() });
 
   return (
     <div className="fixed flex justify-end w-screen p-3 select-none">
