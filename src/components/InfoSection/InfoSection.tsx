@@ -10,8 +10,8 @@ function InfoSection() {
   const { data, isFetching } = useUserData({ enabled: checkIsLoggedIn() });
 
   return (
-    <div className="flex gap-4 justify-between items-center p-6 h-96">
-      <div className="flex flex-col items-center justify-center min-w-48">
+    <div className="flex gap-4 justify-between items-center h-96">
+      <div className="flex flex-col justify-center min-w-48">
         {isFetching && <LoadingSpinner light size="l" />}
         {!isFetching && (
           <>
