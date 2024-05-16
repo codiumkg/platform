@@ -120,8 +120,8 @@ function TaskDetails({ task }: Props) {
         ) : (
           <div className="flex">
             <Textarea
-              label="Ответ"
-              placeholder="Введите ответ"
+              label="Ваш ответ"
+              placeholder="Введите ваш ответ..."
               classNames={{ input: "min-h-32" }}
               isDisabled={task.isCompleted}
               value={customAnswer}
