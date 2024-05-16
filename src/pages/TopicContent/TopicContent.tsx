@@ -108,7 +108,7 @@ function TopicContent() {
           ))}
       </div>
 
-      <div>
+      <div className="w-full">
         {activeContent?.type === TopicContentType.LECTURE ? (
           <LectureDetails lecture={activeContent?.lecture} />
         ) : (
