@@ -16,7 +16,9 @@ function TaskDetails({ task }: Props) {
     task?.userAnswer?.answer || null
   );
 
-  const [customAnswer, setCustomAnswer] = useState("");
+  const [customAnswer, setCustomAnswer] = useState(
+    task?.userAnswer?.text || ""
+  );
 
   const { showSuccessNotification, showErrorNotification } = useNotification();
 
@@ -80,9 +82,13 @@ function TaskDetails({ task }: Props) {
 
   useEffect(() => {
     if (task?.userAnswer) {
-      setSelectedAnswer(task.userAnswer.answer);
+      if (task.isUserAnswer) {
+        setCustomAnswer(task.userAnswer.text);
+      } else {
+        setSelectedAnswer(task.userAnswer.answer);
+      }
     }
-  }, [task?.userAnswer]);
+  }, [task?.userAnswer, task?.isUserAnswer]);
 
   if (!task) return null;
 
@@ -117,6 +123,8 @@ function TaskDetails({ task }: Props) {
               label="Ответ"
               placeholder="Введите ответ"
               classNames={{ input: "min-h-32" }}
+              isDisabled={task.isCompleted}
+              value={customAnswer}
               onChange={(e) => setCustomAnswer(e.target.value)}
               autoFocus
             />
