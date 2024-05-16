@@ -7,3 +7,8 @@ export enum TopicContentType {
   TASK = "TASK",
   LECTURE = "LECTURE",
 }
+
+export interface IProgress {
+  completed: number;
+  toComplete: number;
+}
