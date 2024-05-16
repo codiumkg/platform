@@ -14,8 +14,9 @@ function TopicCard({ topic, onClick }: Props) {
     >
       <HiOutlineMap className="text-2xl mb-3" />
       <h1 className="font-bold">{topic.title}</h1>
-      <h3 className="text-sm text-default-900 font-thin">
-        {topic.section.title}
+      <h3 className="text-sm text-default-400">{topic.section.title}</h3>
+      <h3 className="text-sm text-default-400">
+        {topic.progress.completed} / {topic.progress.toComplete}
       </h3>
     </div>
   );

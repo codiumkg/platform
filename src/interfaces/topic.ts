@@ -1,4 +1,4 @@
-import { TopicContentType } from "./common";
+import { IProgress, TopicContentType } from "./common";
 import { ILecture } from "./lecture";
 import { ISection } from "./section";
 import { ITask } from "./task";
@@ -8,6 +8,7 @@ export interface ITopic {
   title: string;
   sectionId: number;
   section: ISection;
+  progress: IProgress;
   createdAt: string;
   updatedAt: string;
 }
