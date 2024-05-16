@@ -1,4 +1,4 @@
-import { useUserData } from "@/queries/userdata";
+import { useUserData, useUserProgress } from "@/queries/userdata";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
@@ -8,6 +8,8 @@ function InfoSection() {
   const { checkIsLoggedIn } = useAuth();
 
   const { data, isFetching } = useUserData({ enabled: checkIsLoggedIn() });
+
+  const { data: progress, isLoading } = useUserProgress();
 
   return (
     <div className="flex gap-4 justify-between items-center h-96">
@@ -24,12 +26,13 @@ function InfoSection() {
           </>
         )}
       </div>
-      <div className="flex flex-col">
-        <div className="w-36 h-36">
+      <div className="flex flex-col gap-4">
+        <div className="w-40 h-40">
           <CircularProgressbar
-            value={0}
-            text="0%"
+            value={progress?.percent || 0}
+            text={!isLoading ? progress?.percent + "%" : "Загрузка..."}
             styles={buildStyles({
+              textSize: "14px",
               strokeLinecap: "butt",
               textColor: "hsl(var(--nextui-foreground))",
               backgroundColor: "hsl(var(--nextui-background))",
@@ -38,7 +41,7 @@ function InfoSection() {
             })}
           />
         </div>
-        {/* <h2 className="text-center mb-4 text-xl">Выполнено</h2> */}
+        <h2 className="text-center text-xl">Выполнено</h2>
       </div>
     </div>
   );

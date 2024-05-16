@@ -1,6 +1,6 @@
 import { IUserData } from "@/interfaces/auth";
 import { useQuery } from "@tanstack/react-query";
-import getUserData from "../requests/auth/getUserData";
+import { getUserData, getUserProgress } from "../requests/auth/userdata";
 import { ApiConstants } from "@/constants/apiConstants";
 import { useLocation, useNavigate } from "react-router";
 import { ApiError } from "@/requests/request";
@@ -40,5 +40,17 @@ export const useUserData = (params?: Params) => {
     isFetching,
     isSuccess,
     isError,
+  };
+};
+
+export const useUserProgress = () => {
+  const { data, isLoading } = useQuery({
+    queryFn: getUserProgress,
+    queryKey: [ApiConstants.GET_USER_PROGRESS],
+  });
+
+  return {
+    data,
+    isLoading,
   };
 };

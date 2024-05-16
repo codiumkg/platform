@@ -12,3 +12,7 @@ export interface IProgress {
   completed: number;
   toComplete: number;
 }
+
+export interface IPercentage {
+  percent: number;
+}

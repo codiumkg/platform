@@ -3,6 +3,7 @@ export class ApiConstants {
   static LOGIN = this.BASE_URL.concat("/auth/login/");
   static USERDATA = this.BASE_URL.concat("/auth/userdata/");
   static USERS = this.BASE_URL.concat("/users/");
+  static GET_USER_PROGRESS = this.USERS.concat("get-my-progress");
 
   static REG_REQUESTS = this.BASE_URL.concat("/reg-requests/");
   static GROUPS = this.BASE_URL.concat("/groups/");
