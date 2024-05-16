@@ -14,4 +14,6 @@ export class ApiConstants {
   static LECTURES = this.BASE_URL.concat("/lectures/");
   static CHECK_ANSWER = (answerId: number) =>
     this.BASE_URL.concat(`/answers/${answerId}/check-answer`);
+  static SAVE_CUSTOM_ANSWER = (taskId: number) =>
+    this.BASE_URL.concat(`/tasks/${taskId}/save-custom-answer`);
 }

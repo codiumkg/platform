@@ -1,8 +1,10 @@
 import { Icons } from "@/components/Icons";
+import { ApiConstants } from "@/constants/apiConstants";
 import { useNotification } from "@/hooks/useNotification";
 import { IAnswer, ITask } from "@/interfaces/task";
-import { useCheckAnswer } from "@/queries/tasks";
+import { useCheckAnswer, useSaveCustomAnswer } from "@/queries/tasks";
 import { Button, Textarea } from "@nextui-org/react";
+import { useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 
 interface Props {
@@ -18,6 +20,8 @@ function TaskDetails({ task }: Props) {
 
   const { showSuccessNotification, showErrorNotification } = useNotification();
 
+  const queryClient = useQueryClient();
+
   const isButtonDisabled = !task?.isUserAnswer
     ? !selectedAnswer
     : !customAnswer;
@@ -31,6 +35,18 @@ function TaskDetails({ task }: Props) {
       showErrorNotification("Ответ неверный");
     },
   });
+
+  const { mutate: saveCustomAnswer, isPending: isSaving } = useSaveCustomAnswer(
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: [ApiConstants.TOPIC_CONTENT, task?.id],
+          refetchType: "all",
+        });
+        showSuccessNotification("Ответ успешно сохранен");
+      },
+    }
+  );
 
   const getButtonStyles = (answer: IAnswer) => {
     if (selectedAnswer?.id === answer.id) {
@@ -57,6 +73,8 @@ function TaskDetails({ task }: Props) {
       if (!selectedAnswer) return;
 
       checkAnswer(selectedAnswer.id);
+    } else {
+      saveCustomAnswer({ id: task.id, text: customAnswer });
     }
   };
 
@@ -108,7 +126,7 @@ function TaskDetails({ task }: Props) {
           <Button
             color="primary"
             isDisabled={isButtonDisabled}
-            isLoading={isPending}
+            isLoading={isPending || isSaving}
             onPress={handleCheckAnswer}
           >
             Подтвердить

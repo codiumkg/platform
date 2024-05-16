@@ -7,3 +7,9 @@ export const checkAnswer = async (answerId: number): Promise<ICheckAnswer> => {
     .get(ApiConstants.CHECK_ANSWER(answerId))
     .then(({ data }) => data);
 };
+
+export const saveCustomAnswer = async (taskId: number, text: string) => {
+  return axios
+    .post(ApiConstants.SAVE_CUSTOM_ANSWER(taskId), { text })
+    .then(({ data }) => data);
+};
