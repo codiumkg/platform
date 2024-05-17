@@ -3,7 +3,13 @@ import { ApiConstants } from "@/constants/apiConstants";
 import { useNotification } from "@/hooks/useNotification";
 import { IAnswer, ITask } from "@/interfaces/task";
 import { useCheckAnswer, useSaveCustomAnswer } from "@/queries/tasks";
-import { Button, Textarea } from "@nextui-org/react";
+import {
+  Button,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  Textarea,
+} from "@nextui-org/react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 
@@ -95,13 +101,32 @@ function TaskDetails({ task }: Props) {
   return (
     <div className="flex flex-col gap-4 items-center justify-center py-10">
       <div className="flex flex-col gap-4 lg:w-[45%]">
+        {task.tip && (
+          <div className="w-full">
+            <Popover
+              showArrow={true}
+              placement="top-start"
+              classNames={{ content: "bg-secondary" }}
+            >
+              <PopoverTrigger>
+                <span className="flex gap-2 items-center text-sm cursor-pointer">
+                  <Icons.EXCLAMATION className="text-lg" /> Подсказка
+                </span>
+              </PopoverTrigger>
+              <PopoverContent>
+                <div className="p-1 max-w-80 text-highlight">{task.tip}</div>
+              </PopoverContent>
+            </Popover>
+          </div>
+        )}
+
         {!!task.correctAnswerExplanation && task.isCompleted && (
           <div className="flex gap-2 p-4 text-secondary w-full bg-bgSecondary rounded-xl border-1 border-secondary">
             {<Icons.EXCLAMATION className="text-xl" />}{" "}
             {task.correctAnswerExplanation}
           </div>
         )}
-        <div className="flex flex-col items-center p-6 bg-bgSecondary rounded-xl w-full">
+        <div className="p-4 bg-bgSecondary rounded-xl w-full">
           <div dangerouslySetInnerHTML={{ __html: task?.text || "" }} />
         </div>
         {!task.isUserAnswer ? (
