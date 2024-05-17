@@ -12,6 +12,7 @@ import { getLastViewedContentId, setLastViewedContentId } from "@/utils/common";
 import { useLectureComplete } from "@/queries/lectures";
 import { useNotification } from "@/hooks/useNotification";
 import { Button } from "@nextui-org/react";
+import { Icons } from "@/components/Icons";
 
 function TopicContent() {
   const { id } = useParams();
@@ -122,7 +123,13 @@ function TopicContent() {
 
       {!isLastContent && (
         <div className="flex justify-center p-10">
-          <Button onPress={handleNextClick} color="primary" size="lg">
+          <Button
+            onPress={handleNextClick}
+            startContent={<Icons.ARROW_FORWARD />}
+            color="primary"
+            variant="light"
+            size="lg"
+          >
             Дальше
           </Button>
         </div>

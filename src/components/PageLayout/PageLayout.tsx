@@ -1,6 +1,5 @@
 import { ReactNode } from "react";
-
-import { IoIosArrowBack } from "react-icons/io";
+import { Icons } from "../Icons";
 
 interface Props {
   title: string;
@@ -12,7 +11,7 @@ function PageLayout({ title, onBackClick, children }: Props) {
   return (
     <div className="pt-10">
       <div className="flex items-center">
-        <IoIosArrowBack
+        <Icons.ARROW_BACK
           className="text-3xl mr-6 cursor-pointer"
           onClick={onBackClick}
         />
