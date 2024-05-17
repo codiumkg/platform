@@ -1,6 +1,10 @@
 import { HTMLAttributes } from "react";
 import { FaExclamationCircle } from "react-icons/fa";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import {
+  IoIosArrowBack,
+  IoIosArrowForward,
+  IoMdCheckmarkCircle,
+} from "react-icons/io";
 
 export const Icons = {
   EXCLAMATION: (props: HTMLAttributes<SVGElement>) => (
@@ -11,5 +15,8 @@ export const Icons = {
   ),
   ARROW_FORWARD: (props: HTMLAttributes<SVGElement>) => (
     <IoIosArrowForward {...props} />
+  ),
+  CHECKMARK_CIRCLE: (props: HTMLAttributes<SVGElement>) => (
+    <IoMdCheckmarkCircle {...props} />
   ),
 };

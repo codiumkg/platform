@@ -6,6 +6,7 @@ import { useLectureComplete } from "@/queries/lectures";
 import { useNotification } from "@/hooks/useNotification";
 import { useQueryClient } from "@tanstack/react-query";
 import { ApiConstants } from "@/constants/apiConstants";
+import { Icons } from "@/components/Icons";
 
 interface Props {
   lecture?: ILecture;
@@ -33,6 +34,12 @@ function LectureDetails({ lecture }: Props) {
 
   return (
     <div className="flex flex-col w-full">
+      {lecture.isCompleted && (
+        <div className="flex items-center gap-2 mb-2 text-secondary font-light">
+          <Icons.CHECKMARK_CIRCLE className="text-xl" />
+          Лекция завершена
+        </div>
+      )}
       <h1 className="text-4xl md:text-5xl font-bold mb-3">{lecture?.title}</h1>
       <div
         className="lecture-content"

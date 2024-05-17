@@ -101,8 +101,8 @@ function TaskDetails({ task }: Props) {
   return (
     <div className="flex flex-col gap-4 items-center justify-center py-10">
       <div className="flex flex-col gap-4 lg:w-[45%]">
-        {task.tip && (
-          <div className="w-full">
+        <div className="flex justify-between items-center w-full">
+          {task.tip && (
             <Popover
               showArrow={true}
               placement="top-start"
@@ -117,8 +117,15 @@ function TaskDetails({ task }: Props) {
                 <div className="p-1 max-w-80 text-highlight">{task.tip}</div>
               </PopoverContent>
             </Popover>
-          </div>
-        )}
+          )}
+
+          {task.isCompleted && (
+            <div className="flex items-center gap-2 mb-2 text-secondary font-light text-sm">
+              <Icons.CHECKMARK_CIRCLE className="text-xl" />
+              Задача выполнена
+            </div>
+          )}
+        </div>
 
         {!!task.correctAnswerExplanation && task.isCompleted && (
           <div className="flex gap-2 p-4 text-secondary w-full bg-bgSecondary rounded-xl border-1 border-secondary">
