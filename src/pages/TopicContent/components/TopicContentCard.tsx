@@ -38,8 +38,8 @@ function TopicContentCard({
         <div
           className={cn(
             "text-xl relative",
-            isCompleted ? (!isActive ? "text-primary-secondary" : "") : "",
-            isActive ? "text-primary" : "text-highlight-secondary"
+            isCompleted ? (!isActive ? "text-secondary" : "") : "",
+            isActive ? "text-primary" : "text-highlight"
           )}
         >
           {!isCompleted ? ICON_BY_TYPE[type] : <IoMdCheckmarkCircle />}
@@ -48,7 +48,7 @@ function TopicContentCard({
       <div
         className={cn(
           "mt-2 text-sm font-thin",
-          isActive ? "text-primary" : "text-highlight-secondary"
+          isActive ? "text-primary" : isCompleted ? "text-secondary" : ""
         )}
       >
         {contentNumber}
