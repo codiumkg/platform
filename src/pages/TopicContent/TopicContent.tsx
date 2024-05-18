@@ -86,7 +86,7 @@ function TopicContent() {
   return (
     <PageLayout title="Задачи и лекции" onBackClick={() => navigate(-1)}>
       <div
-        className="flex justify-center w-full overflow-x-scroll max-h-30 py-8 gap-4"
+        className="flex w-full overflow-x-scroll max-h-30 py-8 gap-4"
         style={{ scrollbarWidth: "none" }}
       >
         {isLoading && (
