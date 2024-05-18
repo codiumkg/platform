@@ -8,7 +8,7 @@ import { ITopicContent } from "@/interfaces/topic";
 import { TopicContentType } from "@/interfaces/common";
 import LectureDetails from "./components/LectureDetails";
 import TaskDetails from "./components/TaskDetails";
-import { getLastViewedContentId, setLastViewedContentId } from "@/utils/common";
+import { getLastVisitedContent, setLastVisitedContent } from "@/utils/common";
 import { useLectureComplete } from "@/queries/lectures";
 import { useNotification } from "@/hooks/useNotification";
 import { Button } from "@nextui-org/react";
@@ -40,24 +40,24 @@ function TopicContent() {
     (activeContent?.orderNumber ?? 1) >= (topicContent?.length ?? 0);
 
   useEffect(() => {
-    const lastViewedContentId = getLastViewedContentId();
+    const lastVisitedContent = getLastVisitedContent(+id!);
 
-    if (lastViewedContentId) {
-      const lastViewedContent = topicContent?.find(
-        (content) => content.id === +lastViewedContentId
+    if (lastVisitedContent) {
+      setActiveContent(
+        topicContent?.find(
+          (content) => content.id === lastVisitedContent.contentId
+        )
       );
-
-      setActiveContent(lastViewedContent);
 
       return;
     }
 
     setActiveContent(topicContent?.[0]);
-  }, [topicContent]);
+  }, [topicContent, id]);
 
   const handleTopicContentClick = (content: ITopicContent) => {
     setActiveContent(content);
-    setLastViewedContentId(content.id);
+    setLastVisitedContent({ contentId: content.id, topicId: content.topicId });
   };
 
   const handleLectureComplete = () => {

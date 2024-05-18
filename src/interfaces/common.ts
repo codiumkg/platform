@@ -16,3 +16,8 @@ export interface IProgress {
 export interface IPercentage {
   percent: number;
 }
+
+export interface ILastVisitedContent {
+  topicId: number;
+  contentId: number;
+}

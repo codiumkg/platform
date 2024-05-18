@@ -7,7 +7,11 @@ import { useNotification } from "@/hooks/useNotification";
 import { useQueryClient } from "@tanstack/react-query";
 import { ApiConstants } from "@/constants/apiConstants";
 import { Icons } from "@/components/Icons";
+import python from "highlight.js/lib/languages/python";
+import hljs from "highlight.js";
+import { useEffect } from "react";
 
+hljs.registerLanguage("python", python);
 interface Props {
   lecture?: ILecture;
 }
@@ -29,6 +33,12 @@ function LectureDetails({ lecture }: Props) {
       showErrorNotification("Не удалось сохранить прогресс лекции");
     },
   });
+
+  useEffect(() => {
+    const nodes = document.querySelectorAll("pre code");
+
+    nodes.forEach((node) => hljs.highlightBlock(node as HTMLElement));
+  }, []);
 
   if (!lecture) return null;
 

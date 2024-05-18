@@ -36,8 +36,13 @@ function TaskDetails({ task }: Props) {
 
   const { mutate: checkAnswer, isPending } = useCheckAnswer({
     onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: [ApiConstants.TOPIC_CONTENT(task!.topicId)],
+      });
+
       if (data.isCorrect) {
         showSuccessNotification("Вы ответили верно!");
+        return;
       }
 
       showErrorNotification("Ответ неверный");
@@ -48,7 +53,7 @@ function TaskDetails({ task }: Props) {
     {
       onSuccess: () => {
         queryClient.invalidateQueries({
-          queryKey: [ApiConstants.TOPIC_CONTENT, task?.id],
+          queryKey: [ApiConstants.TOPIC_CONTENT(task!.topicId)],
           refetchType: "all",
         });
         showSuccessNotification("Ответ успешно сохранен");
@@ -67,7 +72,8 @@ function TaskDetails({ task }: Props) {
       return "bg-secondary text-background";
     }
 
-    if (answer.isCorrectAnswer) return "bg-secondary text-background";
+    if (answer.isCorrectAnswer && task?.isCompleted)
+      return "bg-secondary text-background";
   };
 
   const handleOptionSelect = (answer: IAnswer) => {
