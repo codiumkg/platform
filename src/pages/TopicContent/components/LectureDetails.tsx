@@ -14,9 +14,10 @@ import { useEffect } from "react";
 hljs.registerLanguage("python", python);
 interface Props {
   lecture?: ILecture;
+  isLastContent?: boolean;
 }
 
-function LectureDetails({ lecture }: Props) {
+function LectureDetails({ lecture, isLastContent }: Props) {
   const queryClient = useQueryClient();
 
   const { showSuccessNotification, showErrorNotification } = useNotification();
@@ -56,7 +57,7 @@ function LectureDetails({ lecture }: Props) {
         dangerouslySetInnerHTML={{ __html: lecture?.content || "" }}
       ></div>
 
-      {!lecture.isCompleted && (
+      {isLastContent && !lecture.isCompleted && (
         <div className="flex justify-center w-full mt-10">
           <Button color="primary" onPress={() => completeLecture(lecture.id)}>
             Завершить

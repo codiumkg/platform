@@ -115,7 +115,10 @@ function TopicContent() {
 
       <div className="w-full">
         {activeContent?.type === TopicContentType.LECTURE ? (
-          <LectureDetails lecture={activeContent?.lecture} />
+          <LectureDetails
+            lecture={activeContent?.lecture}
+            isLastContent={isLastContent}
+          />
         ) : (
           <TaskDetails task={activeContent?.task} />
         )}
