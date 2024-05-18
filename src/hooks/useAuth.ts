@@ -32,7 +32,7 @@ export default function useAuth() {
 
   const logout = useCallback(() => {
     removeTokenFromStorage();
-    localStorage.removeItem(StorageKeys.LAST_VISITED_CONTENT_ID);
+    localStorage.removeItem(StorageKeys.LAST_VISITED_CONTENT);
     queryClient.invalidateQueries({
       queryKey: [ApiConstants.USERDATA],
       refetchType: "all",
