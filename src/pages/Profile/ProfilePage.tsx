@@ -1,4 +1,5 @@
 import CustomInput from "@/components/CustomInput";
+import useAuth from "@/hooks/useAuth";
 import { useNotification } from "@/hooks/useNotification";
 import { IChangePassword } from "@/interfaces/auth";
 import { useChangePassword } from "@/queries/userdata";
@@ -16,6 +17,8 @@ import { useState } from "react";
 export default function ProfilePage() {
   const { isOpen, onOpenChange, onClose, onOpen } = useDisclosure();
 
+  const { logout } = useAuth();
+
   const { showErrorNotification, showSuccessNotification } = useNotification();
 
   const [passwordData, setPasswordData] = useState<IChangePassword>({
@@ -30,7 +33,10 @@ export default function ProfilePage() {
   const { mutate: changePassword, isPending: isChangingPassword } =
     useChangePassword({
       onSuccess: () => {
-        showSuccessNotification("Пароль успешно изменен");
+        showSuccessNotification(
+          "Пароль успешно изменен, войдите с новым паролем"
+        );
+        logout();
         onClose();
       },
       onError: () => {
@@ -43,11 +49,7 @@ export default function ProfilePage() {
     if (isChangePasswordDisabled) return;
 
     changePassword(passwordData);
-
-    setPasswordData({ currentPassword: "", newPassword: "" });
   };
-
-  console.log(passwordData);
 
   return (
     <div className="mt-12">
@@ -57,6 +59,7 @@ export default function ProfilePage() {
           <CustomInput
             label="Текущий пароль"
             placeholder="Введите текущий пароль..."
+            value={passwordData.currentPassword}
             onChange={(e) =>
               setPasswordData({
                 ...passwordData,
@@ -68,6 +71,7 @@ export default function ProfilePage() {
           <CustomInput
             label="Новый пароль"
             placeholder="Введите новый пароль..."
+            value={passwordData.newPassword}
             onChange={(e) =>
               setPasswordData({
                 ...passwordData,
