@@ -7,7 +7,7 @@ import {
 import { Input } from "@nextui-org/react";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
-  name: string;
+  name?: string;
   value?: string;
   type?: HTMLInputTypeAttribute;
   placeholder?: string;

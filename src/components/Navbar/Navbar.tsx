@@ -1,4 +1,5 @@
 import CodiumLogo from "@/assets/codium_logo_solo.png";
+import { ROUTES } from "@/constants/routes";
 import useAuth from "@/hooks/useAuth";
 import { useUserData } from "@/queries/userdata";
 import {
@@ -7,14 +8,17 @@ import {
   DropdownMenu,
   DropdownTrigger,
 } from "@nextui-org/react";
+import { useNavigate } from "react-router";
 
 function Navbar() {
   const { logout, checkIsLoggedIn } = useAuth();
 
+  const navigate = useNavigate();
+
   const { data: userData } = useUserData({ enabled: checkIsLoggedIn() });
 
   return (
-    <div className="fixed flex justify-end w-screen p-3 select-none">
+    <div className="fixed flex justify-end w-screen p-3 select-none backdrop-blur">
       {checkIsLoggedIn() && (
         <Dropdown aria-label="Dropdown">
           <DropdownTrigger aria-label="trigger">
@@ -31,6 +35,9 @@ function Navbar() {
             </div>
           </DropdownTrigger>
           <DropdownMenu aria-label="menu">
+            <DropdownItem onPress={() => navigate(ROUTES.PROFILE)}>
+              Профиль
+            </DropdownItem>
             <DropdownItem onPress={logout} aria-label="Выйти">
               Выйти
             </DropdownItem>

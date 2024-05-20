@@ -5,6 +5,7 @@ import {
   IoIosArrowForward,
   IoMdCheckmarkCircle,
 } from "react-icons/io";
+import { MdHome } from "react-icons/md";
 
 export const Icons = {
   EXCLAMATION: (props: HTMLAttributes<SVGElement>) => (
@@ -19,4 +20,5 @@ export const Icons = {
   CHECKMARK_CIRCLE: (props: HTMLAttributes<SVGElement>) => (
     <IoMdCheckmarkCircle {...props} />
   ),
+  HOME: (props: HTMLAttributes<SVGElement>) => <MdHome {...props} />,
 };

@@ -1,11 +1,12 @@
-import { IUserData } from "@/interfaces/auth";
-import { useQuery } from "@tanstack/react-query";
+import { IChangePassword, IUserData } from "@/interfaces/auth";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { getUserData, getUserProgress } from "../requests/auth/userdata";
 import { ApiConstants } from "@/constants/apiConstants";
 import { useLocation, useNavigate } from "react-router";
 import { ApiError } from "@/requests/request";
 import { ROUTES } from "@/constants/routes";
 import { useNotification } from "@/hooks/useNotification";
+import { changePassword } from "@/requests/auth/changePassword";
 
 interface Params {
   enabled?: boolean;
@@ -52,5 +53,21 @@ export const useUserProgress = () => {
   return {
     data,
     isLoading,
+  };
+};
+
+export const useChangePassword = (params?: {
+  onSuccess?: () => void;
+  onError?: () => void;
+}) => {
+  const { mutate, isPending } = useMutation({
+    mutationFn: (data: IChangePassword) => changePassword(data),
+    onSuccess: params?.onSuccess,
+    onError: params?.onError,
+  });
+
+  return {
+    mutate,
+    isPending,
   };
 };

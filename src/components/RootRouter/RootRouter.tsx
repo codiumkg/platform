@@ -9,6 +9,7 @@ import RootLayout from "../RootLayout/RootLayout";
 import SectionDetails from "@/pages/Section/SectionDetails";
 import TopicContent from "@/pages/TopicContent/TopicContent";
 import Login from "@/pages/Login/Login";
+import ProfilePage from "@/pages/Profile/ProfilePage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -17,6 +18,7 @@ const router = createBrowserRouter(
       <Route path="login" element={<Login />} />
       <Route path="section/:id" element={<SectionDetails />} />
       <Route path="topic/:id" element={<TopicContent />} />
+      <Route path="profile" element={<ProfilePage />} />
     </Route>
   )
 );
