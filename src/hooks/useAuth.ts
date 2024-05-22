@@ -1,4 +1,3 @@
-import { ApiConstants } from "@/constants/apiConstants";
 import { ROUTES } from "@/constants/routes";
 import { StorageKeys } from "@/constants/storageKeys";
 import { useQueryClient } from "@tanstack/react-query";
@@ -31,12 +30,10 @@ export default function useAuth() {
   };
 
   const logout = useCallback(() => {
-    removeTokenFromStorage();
-    localStorage.removeItem(StorageKeys.LAST_VISITED_CONTENT);
-    queryClient.invalidateQueries({
-      queryKey: [ApiConstants.USERDATA],
-      refetchType: "all",
-    });
+    localStorage.clear();
+    queryClient.resetQueries();
+    queryClient.invalidateQueries();
+
     navigate(ROUTES.LOGIN);
   }, [navigate, queryClient]);
 

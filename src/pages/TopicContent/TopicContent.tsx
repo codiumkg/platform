@@ -13,11 +13,15 @@ import { useLectureComplete } from "@/queries/lectures";
 import { useNotification } from "@/hooks/useNotification";
 import { Button } from "@nextui-org/react";
 import { Icons } from "@/components/Icons";
+import { useQueryClient } from "@tanstack/react-query";
+import { ApiConstants } from "@/constants/apiConstants";
 
 function TopicContent() {
   const { id } = useParams();
 
   const navigate = useNavigate();
+
+  const queryClient = useQueryClient();
 
   const [activeContent, setActiveContent] = useState<
     ITopicContent | undefined
@@ -30,6 +34,11 @@ function TopicContent() {
   const { mutate: completeLecture } = useLectureComplete({
     onSuccess: () => {
       showSuccessNotification("Лекция успешно завершена");
+      queryClient.invalidateQueries({
+        queryKey: [ApiConstants.TOPIC_CONTENT(+id!)],
+      });
+
+      handleContentChange();
     },
     onError: () => {
       showErrorNotification("Не удалось сохранить прогресс лекции");
@@ -72,16 +81,29 @@ function TopicContent() {
   };
 
   const handleNextClick = () => {
-    if (!isLastContent && activeContent) {
-      handleLectureComplete();
-
-      setActiveContent(
-        topicContent?.find(
-          (content) => content.orderNumber === activeContent.orderNumber + 1
-        )
-      );
+    if (activeContent) {
+      if (activeContent.type === TopicContentType.LECTURE) {
+        !activeContent.lecture?.isCompleted && handleLectureComplete();
+      } else {
+        if (!isLastContent) {
+          handleContentChange();
+        }
+      }
     }
   };
+
+  const handleContentChange = () => {
+    window.scrollTo({ top: 0 });
+
+    setActiveContent(
+      topicContent?.find(
+        (content) =>
+          content.orderNumber === Number(activeContent?.orderNumber) + 1
+      )
+    );
+  };
+
+  if (!id) return null;
 
   return (
     <PageLayout title="Задачи и лекции" onBackClick={() => navigate(-1)}>
@@ -116,6 +138,7 @@ function TopicContent() {
       <div className="w-full">
         {activeContent?.type === TopicContentType.LECTURE ? (
           <LectureDetails
+            topicId={+id}
             lecture={activeContent?.lecture}
             isLastContent={isLastContent}
           />

@@ -5,7 +5,7 @@ import {
   getLectureDetails,
   getLectures,
 } from "@/requests/lectures";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const useLecturesQuery = () => {
   const { data, isLoading } = useQuery({

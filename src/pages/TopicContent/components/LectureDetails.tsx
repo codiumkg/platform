@@ -15,9 +15,10 @@ hljs.registerLanguage("python", python);
 interface Props {
   lecture?: ILecture;
   isLastContent?: boolean;
+  topicId: number;
 }
 
-function LectureDetails({ lecture, isLastContent }: Props) {
+function LectureDetails({ lecture, isLastContent, topicId }: Props) {
   const queryClient = useQueryClient();
 
   const { showSuccessNotification, showErrorNotification } = useNotification();
@@ -25,7 +26,7 @@ function LectureDetails({ lecture, isLastContent }: Props) {
   const { mutate: completeLecture } = useLectureComplete({
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [ApiConstants.LECTURES, lecture?.id],
+        queryKey: [ApiConstants.TOPIC_CONTENT(topicId)],
         refetchType: "all",
       });
       showSuccessNotification("Лекция успешно завершена");
@@ -38,7 +39,7 @@ function LectureDetails({ lecture, isLastContent }: Props) {
   useEffect(() => {
     const nodes = document.querySelectorAll("pre code");
 
-    nodes.forEach((node) => hljs.highlightBlock(node as HTMLElement));
+    nodes.forEach((node) => hljs.highlightElement(node as HTMLElement));
   }, []);
 
   if (!lecture) return null;
