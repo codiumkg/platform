@@ -91,7 +91,7 @@ export default {
               300: '#d2d2d2',
               200: '#e7e7e7',
               100: '#e5e5e5',
-              50: '#eeeeee  ',
+              50: '#e1e1e1',
 
             },
             focus: "#ffc38d",
