@@ -68,7 +68,7 @@ export default {
         
         },
         "codium-light": {
-          extend: "dark",
+          extend: "light",
           layout: {},
           colors: {
             content1: "#ffffff",
