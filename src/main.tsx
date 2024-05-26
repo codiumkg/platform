@@ -6,6 +6,7 @@ import App from "./App.tsx";
 import "./index.css";
 import "@/requests/request.ts";
 import { NextUIProvider } from "@nextui-org/react";
+import { ThemeProvider } from "./contexts/ThemeContext.tsx";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -23,7 +24,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   // <React.StrictMode>
   <NextUIProvider>
     <QueryClientProvider client={queryClient}>
-      <App />
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
       {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </QueryClientProvider>
   </NextUIProvider>

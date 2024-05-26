@@ -122,7 +122,7 @@ export default function Login() {
             type="submit"
             color="primary"
             isLoading={isLoading}
-            disabled={!isValid || !isDirty || isLoading}
+            isDisabled={!isValid || !isDirty || isLoading}
           >
             Войти
           </Button>

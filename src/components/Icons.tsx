@@ -4,8 +4,10 @@ import {
   IoIosArrowBack,
   IoIosArrowForward,
   IoMdCheckmarkCircle,
+  IoMdMoon,
 } from "react-icons/io";
 import { MdHome } from "react-icons/md";
+import { BiSolidSun } from "react-icons/bi";
 
 export const Icons = {
   EXCLAMATION: (props: HTMLAttributes<SVGElement>) => (
@@ -21,4 +23,6 @@ export const Icons = {
     <IoMdCheckmarkCircle {...props} />
   ),
   HOME: (props: HTMLAttributes<SVGElement>) => <MdHome {...props} />,
+  SUN: (props: HTMLAttributes<SVGElement>) => <BiSolidSun {...props} />,
+  MOON: (props: HTMLAttributes<SVGElement>) => <IoMdMoon {...props} />,
 };
