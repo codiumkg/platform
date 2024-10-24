@@ -24,8 +24,7 @@ jobs:
       - name: Build docker image
         run: |
           docker build -t ${{ secrets.DOCKER_USERNAME }}/platform \
-               --build-arg VITE_BASE_URL=${{ secrets.VITE_BASE_URL }} \
-               --target=production .
+               --build-arg VITE_BASE_URL=${{ secrets.VITE_BASE_URL }} .
       - name: Push docker image to Docker Hub
         run: docker push ${{ secrets.DOCKER_USERNAME }}/platform:latest
 
