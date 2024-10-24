@@ -13,7 +13,7 @@ export const ThemeContext = createContext<ThemeContextProps | undefined>(
 
 export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [theme, setTheme] = useState<Theme>(
-    (localStorage.getItem(StorageKeys.THEME) as Theme) || Theme.CODIUM_DARK
+    (localStorage.getItem(StorageKeys.THEME) as Theme) || Theme.CODIUM_LIGHT
   );
 
   const toggleTheme = () => {

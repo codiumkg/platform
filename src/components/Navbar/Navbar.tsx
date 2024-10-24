@@ -1,5 +1,5 @@
 import CodiumLogo from "@/assets/codium_logo_solo.png";
-import CodiumLogoFull from "@/assets/codium_logo.png";
+import CodiumLogoFull from "@/assets/codium_logo_text.svg";
 import { ROUTES } from "@/constants/routes";
 import useAuth from "@/hooks/useAuth";
 import { useUserData } from "@/queries/userdata";
