@@ -29,7 +29,8 @@
     "react-router": "^6.27.0",
     "react-router-dom": "^6.27.0",
     "vite-tsconfig-paths": "^5.0.1",
-    "yup": "^1.4.0"
+    "yup": "^1.4.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/node": "^22.7.9",

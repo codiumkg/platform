@@ -1,6 +1,6 @@
-import * as Yup from "yup";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 
 import { Button } from "@nextui-org/react";
 import CustomInput from "@/components/CustomInput";
@@ -13,25 +13,22 @@ import { ROUTES } from "@/constants/routes";
 
 import useAuth from "@/hooks/useAuth";
 
-const loginValidationSchema = Yup.object({
-  username: Yup.string()
-    .min(3, "Логин должен быть не менее 3 символов")
-    .max(32, "Логин должен быть не более 32 символов")
-    .required("Это поле обязательное"),
-  password: Yup.string()
-    .min(6, "Пароль должен быть не менее 6 символов")
-    .required("Это поле обязательное"),
+const loginValidationSchema = z.object({
+  username: z
+    .string()
+    .min(3, { message: "Логин должен быть не менее 3 символов" })
+    .max(32, { message: "Логин не должен быть более 32 символов" }),
+  password: z
+    .string()
+    .min(6, { message: "Пароль должен быть не менее 6 символов" }),
 });
+
+type LoginSchemaType = z.infer<typeof loginValidationSchema>;
 
 const initialValues = {
   username: "",
   password: "",
 };
-
-interface LoginForm {
-  username: string;
-  password: string;
-}
 
 export default function Login() {
   const { checkIsLoggedIn, setTokenToStorage } = useAuth();
@@ -50,13 +47,13 @@ export default function Login() {
     }
   }, [checkIsLoggedIn, navigate]);
 
-  const loginForm = useForm<LoginForm>({
+  const loginForm = useForm<LoginSchemaType>({
     defaultValues: initialValues,
-    resolver: yupResolver(loginValidationSchema),
-    mode: "onBlur",
+    resolver: zodResolver(loginValidationSchema),
+    mode: "onChange",
   });
 
-  const onSubmit: SubmitHandler<LoginForm> = (data: ILogin) => {
+  const onSubmit: SubmitHandler<LoginSchemaType> = (data: ILogin) => {
     setIsLoading(true);
     loginRequest(data)
       .then((res) => {
@@ -78,6 +75,8 @@ export default function Login() {
   };
 
   const { isDirty, isValid } = loginForm.formState;
+
+  console.log(loginForm.formState.errors);
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
